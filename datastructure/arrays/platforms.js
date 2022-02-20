@@ -2,12 +2,6 @@
 // the task is to find the minimum number of platforms required for the railway station so that no train waits. 
 // We are given two arrays that represent the arrival and departure times of trains that stop.
 
-const findMax = (a,b)=>{
-    if(a>b)return a;
-    if(a===b)return a;
-    if(b>a)return b;
-}
-
 const printPlatform = (arr,dep,n) => {
     let platform = 1;
     let result = 1;
@@ -21,7 +15,7 @@ const printPlatform = (arr,dep,n) => {
             }
         }
 
-        result = findMax(result, platform);
+        result = Math.max(result, platform);
     }
 
     return result;

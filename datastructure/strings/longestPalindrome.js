@@ -7,36 +7,67 @@
 // Output: "ee".
 
 // brute force approach
-const isPalindrome = (str) => {
-    let palindrome = false;
-    for (let i = 0; i < str.length - 1/2; i++){
-        if(str.charAt(i) !== str.charAt(str.length - i - 1)){
-            return palindrome = false;
-        }
+function isPalindrome(str) {
+    let l = 0,
+      r = str.length - 1;
+    while (l < r) {
+      if (str[l] !== str[r]) return false;
+      l++, r--;
     }
+    return true;
+  }
 
-    return palindrome = true;
-}
-
-const brute = (str) => {
-    let tempString = "";
-    for (let i = 0; i < str.length; i++) {
-        for (let j = i + 1; j < str.length; j++) {
-            let temp = str.substring(i,j);
-            if(isPalindrome(temp)){
-                if(temp.length > tempString.length){
-                    tempString = temp;
-                }
-            }
-        }
+  var longestPal = function (s) {
+    for (let j = s.length - 1; j >= 0; j--) {
+      let i = 0,
+        k = j;
+      while (k < s.length) {
+        let substr = s.substring(i, k + 1);
+        if (isPalindrome(substr)) return substr;
+        i++, k++;
+      }
     }
+    return "";
+  };
 
-    return tempString;
-}
+// var longestPalindrome = function(s) {
+//     const set = new Set();
+//     let count = 0;
+    
+//     for (const char of s) {
+//         if (set.has(char)) {
+// 			count += 2;
+//             set.delete(char);
+//         } 
+// 		else {
+//             set.add(char);
+//         }
+//     }
 
-const longestPal = (str) => {
-    const temp = brute(str);
-    return temp;
-}
+//     return count + (set.size > 0 ? 1 : 0);
+// };
 
 console.log(longestPal("forgeeksskeegfor"))
+
+var longestPalindrome = function(s) {
+    let start, end, result = 0;
+    
+    for(let i=0; i < s.length; i++) {
+        let tempStart = i;
+        let tempEnd = i;
+        
+        while(s[tempEnd] === s[tempEnd+1]) tempEnd++;
+        
+        while(tempStart >= 0 && tempEnd < s.length && s[tempStart-1] == s[tempEnd+1]) {
+            tempStart--;
+            tempEnd++
+        }
+        
+        if(result < tempEnd - tempStart+1) {
+            result = tempEnd - tempStart+1;
+            start = tempStart;
+            end = tempEnd;
+        }
+    }
+    return s.substring(start, end+1);
+};

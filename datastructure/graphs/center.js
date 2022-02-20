@@ -10,7 +10,7 @@
 // Explanation: As shown in the figure above, node 2 is connected to every other node, so 2 is the center.
 // Example 2:
 
-// Input: edges = [[1,2],[5,1],[1,3],[1,4]]
+const edges = [[1,2],[5,1],[1,3],[1,4]]
 // Output: 1
 
 const findCenter = (edges) => {
@@ -18,7 +18,11 @@ const findCenter = (edges) => {
     for(let [i,j] of edges){
         if(visited.has(i)) return i;
         if(visited.has(j)) return j;
-        visited.set(i, 1);
-        visited.set(j, 1);
+        visited.add(i, 1);
+        visited.add(j, 1);
     }
+
+    return visited.size;
 }
+
+findCenter(edges);
