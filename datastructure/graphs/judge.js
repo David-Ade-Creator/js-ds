@@ -33,14 +33,23 @@
 // ai != bi
 // 1 <= ai, bi <= n
 
-// public int findJudge(int N, int[][] trust) {
-//     int[] count = new int[N+1];
-//     for (int[] t: trust) {
-//         count[t[0]]--;
-//         count[t[1]]++;
-//     }
-//     for (int i = 1; i <= N; ++i) {
-//         if (count[i] == N - 1) return i;
-//     }
-//     return -1;
-// }
+var findJudge = function(n, trust) {
+    const Trusted = new Array(n+1).fill(0);
+    for(let [i,j] of trust) {
+        console.log(i,j)
+        console.log(Trusted)
+        Trusted[i] -= 1
+        Trusted[j] += 1
+    }
+    console.log(Trusted)
+    for(let i = 1; i < Trusted.length; i++) {
+        if ((n-1) === Trusted[i]) {
+            return i;
+        }
+    }
+    return -1
+};
+
+Input: n = 3, trust = [[1,3],[2,3],[0,3]];
+
+console.log(findJudge(n, trust))
